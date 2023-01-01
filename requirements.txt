@@ -1,0 +1,9 @@
+fastapi>=0.68.1
+uvicorn>=0.15.0
+# psycopg2-binary==2.9.1
+asyncpg==0.27.0
+sqlmodel>=0.0.4
+
+SQLAlchemy>=1.4.41
+alembic==1.9.1
+
