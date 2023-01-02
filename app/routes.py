@@ -10,7 +10,7 @@ router = APIRouter()
 
 
 @router.get("/songs", response_model=list[Song])
-async def get_songs(session: AsyncSession = Depends(get_session)):
+async def get_all_songs(session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(Song))
     songs = result.scalars().all()
     return [Song(name=song.name, artist=song.artist, id=song.id) for song in songs]
@@ -52,6 +52,7 @@ async def update_song(song_id: int,
                       song: SongBase,
                       session: AsyncSession = Depends(get_session)
                       ):
+    print('song_ dict: ', *song)
     query = update(Song).where(Song.id == song_id).values(
         name=song.name,
         artist=song.artist,
@@ -60,3 +61,5 @@ async def update_song(song_id: int,
     await session.execute(query)
     await session.commit()
     return {'updated': 'ok'}
+
+
